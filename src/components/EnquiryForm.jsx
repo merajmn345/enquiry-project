@@ -28,7 +28,7 @@ function EnquiryForm({ fetchEnquiry, formData, setFormData }) {
                 .catch((err) => toast.error("Failed to update enquiry"));
         } else {
             axios
-                .post("http://localhost:8080/api/enquiry/insert", formData)
+                .post(`${API_URL}/insert`, formData)
                 .then((res) => {
                     // fetchEnquiry();
                     toast.success("Saved successfully!");
