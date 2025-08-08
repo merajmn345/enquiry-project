@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 
+const API_URL = import.meta.env.VITE_API_BASE_URL;
+console.log(API_URL);
 function Enquiry() {
     const [enquiryData, setEnquiryData] = useState([]);
     const [formData, setFormData] = useState({
@@ -15,7 +17,7 @@ function Enquiry() {
         _id: "",
     });
     const fetchEnquiry = () => {
-        axios.get("http://localhost:8080/api/enquiry/list").then((res) => {
+        axios.get(`${API_URL}/list`).then((res) => {
             const result = res.data.data;
             // console.log(res.data);
             setEnquiryData(result);
@@ -35,7 +37,7 @@ function Enquiry() {
         }).then((willDelete) => {
             if (willDelete) {
                 axios
-                    .delete(`http://localhost:8080/api/enquiry/delete/${id}`)
+                    .delete(`${API_URL}/delete/${id}`)
                     .then((res) => {
                         toast.success("Delete successfully!");
                     })
@@ -59,7 +61,7 @@ function Enquiry() {
 
     const handleEdit = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:8080/api/enquiry/single-user/${id}`);
+            const response = await axios.get(`${API_URL}/single-user/${id}`);
             console.log("API Response:", response.data);
 
             // Check the structure of your API response

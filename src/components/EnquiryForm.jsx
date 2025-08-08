@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Button, Label, Textarea, TextInput } from "flowbite-react";
 import { toast } from "react-toastify";
 import axios from "axios";
+
+const API_URL = import.meta.env.VITE_API_BASE_URL;
+
 function EnquiryForm({ fetchEnquiry, formData, setFormData }) {
     const handleChange = (e) => {
         setFormData({
@@ -15,7 +18,7 @@ function EnquiryForm({ fetchEnquiry, formData, setFormData }) {
 
         if (formData._id) {
             axios
-                .put(`http://localhost:8080/api/enquiry/update/${formData._id}`, formData)
+                .put(`${API_URL}/update/${formData._id}`, formData)
                 .then(() => {
                     toast.success("Enquiry updated!");
                     setFormData({ name: "", email: "", phone: "", message: "", _id: "" });
